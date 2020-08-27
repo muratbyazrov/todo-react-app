@@ -24,7 +24,7 @@ export default class TodoListItem extends Component { // класс наслед
   };
 
   render() {
-    const { label } = this.props; // у класса props тут, а у ф-ци - параметры
+    const { label, onDeleted } = this.props; // у класса props тут, а у ф-ци - параметры
     const { done, important } = this.state; // см. выше - управляет состоянием
     let classNames = 'todo-list-item';
     if (done) {
@@ -50,7 +50,8 @@ export default class TodoListItem extends Component { // класс наслед
         </button>
 
         <button type='button'
-          className='btn btn-outline-danger btn-sm float-right'>
+          className='btn btn-outline-danger btn-sm float-right'
+          onClick={onDeleted}> {/* onDeleted ф-ция, которую передали из todoList как параметр */}
           <i className='fa fa-trash-o'></i>
         </button>
       </span>)

@@ -42,13 +42,21 @@ export default class App extends Component {
       id: this.maxId++ // с id 100...
     }
 
-    this.setState(({todoData}) => { // передаем ф-цию, а не объект, т.к. важно предыдущее состояние см. наверх
-      const newArr = [ ...todoData, newItem ]; // новый массив, а не меняем старый
+    this.setState(({ todoData }) => { // передаем ф-цию, а не объект, т.к. важно предыдущее состояние см. наверх
+      const newArr = [...todoData, newItem]; // новый массив, а не меняем старый
       return { // возвращаем новый массив и ревкт понимает, что поменялось что-то
         todoData: newArr // присваивать новый массив можно, а перезаписывать нельзя
       };
     });
-  }
+  };
+
+  onToggleImportant = (id) => {
+    console.log('important', id)
+  };
+
+  onToggleDone = (id) => {
+    console.log('done', id)
+  };
 
   render() {
     return (
@@ -59,7 +67,9 @@ export default class App extends Component {
           <ItemStatusFilter />
         </div>
         <TodoList todos={this.state.todoData}
-          onDeleted={this.deletesItem} /> {/* onDeleted - св-во, перед-ся на TodoList */}
+          onDeleted={this.deletesItem} /* onDeleted - св-во, перед-ся на TodoList */
+          onToggleImportant={this.onToggleImportant}
+          onToggleDone={this.onToggleDone}/>
         <ItmeAddForm onItemAdded={this.addItem} />
       </div>
     );
